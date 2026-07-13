@@ -1,0 +1,412 @@
+:root {
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  color: #f3e9d2;
+  background: #1c1533;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-bottom: 2px solid #ff5da2;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.marke {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.bestell-zaehler {
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+section[aria-label="Warenkorb-Übersicht"] {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  background: #2b2150;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+}
+
+section[aria-label="Warenkorb-Übersicht"] strong {
+  color: #ffd166;
+  font-size: 1.25rem;
+}
+
+.such-leiste {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.such-leiste input[type="search"] {
+  flex: 1;
+  min-width: 200px;
+  background: #2b2150;
+  border: 1px solid #3d2f6b;
+  border-radius: 8px;
+  color: #f3e9d2;
+  padding: 0.6rem 0.9rem;
+  font: inherit;
+}
+
+.such-leiste label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.cocktail-liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+.cocktail-karte {
+  background: #2b2150;
+  border: 1px solid #3d2f6b;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  height: 100%;
+}
+
+.cocktail-karte h3 {
+  margin: 0;
+}
+
+.cocktail-karte .beschreibung {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  flex: 1;
+}
+
+.cocktail-karte .preis {
+  margin: 0;
+  font-weight: bold;
+  color: #ffd166;
+}
+
+.cocktail-karte .preis s,
+section[aria-label="Warenkorb-Übersicht"] s {
+  font-size: 0.8em;
+  font-weight: normal;
+  opacity: 0.55;
+}
+
+.cocktail-karte button {
+  margin-top: 0.5rem;
+  background: #ff5da2;
+  color: #1c1533;
+  border: none;
+  border-radius: 8px;
+  padding: 0.55rem 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cocktail-karte button:hover {
+  background: #ff7db6;
+}
+
+/* Warenkorb-Drawer — slidet von rechts rein.
+   Die Transition ist bewusst deutlich (0.4s): Der Bestellen-Button wird erst
+   nach transitionend aktiv → Flakiness-Quelle für die Playwright-Übung. */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: min(380px, 90vw);
+  background: #241a44;
+  border-left: 2px solid #ff5da2;
+  box-shadow: -12px 0 30px rgba(0, 0, 0, 0.4);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  visibility: hidden;
+  transform: translateX(100%);
+  transition:
+    transform 0.4s ease,
+    visibility 0.4s;
+}
+
+.drawer.offen {
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.drawer-kopf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.drawer-kopf h2 {
+  margin: 0;
+}
+
+.drawer-kopf button {
+  background: transparent;
+  color: #f3e9d2;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.drawer-positionen {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.drawer-positionen li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  background: #2b2150;
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+}
+
+.drawer-positionen .pos-name {
+  font-weight: bold;
+}
+
+.drawer-positionen .pos-summe {
+  color: #ffd166;
+  text-align: right;
+}
+
+.drawer-positionen button {
+  border: none;
+  border-radius: 6px;
+  background: #3d2f6b;
+  color: #f3e9d2;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+}
+
+.drawer-leer {
+  flex: 1;
+  opacity: 0.75;
+}
+
+.drawer-fuss {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-top: 1px solid #3d2f6b;
+  padding-top: 0.75rem;
+}
+
+.drawer-fuss strong {
+  color: #ffd166;
+  font-size: 1.2rem;
+  margin-right: auto;
+}
+
+.drawer-fuss button {
+  background: #06d6a0;
+  color: #1c1533;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.drawer-fuss button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+section[aria-label="Warenkorb-Übersicht"] button {
+  background: #ff5da2;
+  color: #1c1533;
+  border: none;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Bestell-Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(420px, 92vw);
+  height: fit-content;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #241a44;
+  border: 2px solid #06d6a0;
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal h2 {
+  margin-top: 0;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.modal label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.modal input,
+.modal textarea {
+  background: #1c1533;
+  border: 1px solid #3d2f6b;
+  border-radius: 6px;
+  color: #f3e9d2;
+  padding: 0.5rem;
+  font: inherit;
+}
+
+.modal textarea {
+  min-height: 4rem;
+  resize: vertical;
+}
+
+.modal [role="alert"] {
+  color: #ff6b6b;
+  margin: 0;
+}
+
+/* Checkbox-/Radio-Labels im Konfigurator: Kästchen und Zutatentext
+   nebeneinander statt gestapelt (überschreibt .modal label column). */
+.konfigurator fieldset label {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.konfigurator fieldset label input {
+  flex: none;
+  margin: 0;
+}
+
+.modal button[type="submit"] {
+  background: #06d6a0;
+  color: #1c1533;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal [role="status"] {
+  font-size: 1.25rem;
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+/* Coupon-Feld */
+.coupon-feld {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  align-items: end;
+  border-bottom: 1px solid #3d2f6b;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.coupon-feld button {
+  background: #ffd166;
+  color: #1c1533;
+  border: none;
+  border-radius: 8px;
+  padding: 0.55rem 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.coupon-feld .coupon-erfolg {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #06d6a0;
+}
+
+.coupon-feld [role="alert"] {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #ff6b6b;
+}
+
+/* Erfolgs-Toast */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #06d6a0;
+  color: #1c1533;
+  font-weight: bold;
+  padding: 0.85rem 1.4rem;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}

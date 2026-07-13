@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Build-Output
+dist/
+dist-ssr/
+
+# Vite / Vitest
+*.local
+coverage/
+
+# TypeScript
+*.tsbuildinfo
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Editor / OS
+.DS_Store
+*.log
+.playwright-mcp/
